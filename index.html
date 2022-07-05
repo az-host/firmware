@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Auza Firmware Updates</title>
+<!--     <script src="dfu.js"></script>
+    <script src="dfuse.js"></script>
+    <script src="FileSaver.js"></script> -->
+<!--     <script src="dfu-util.js"></script> -->
+    <script src="dfu.js"></script>
+    <script src="dfuse.js"></script>
+    <script src="firmware-updater.js"></script>
+
+    <style>
+      p.warning {
+        color: red;
+      }
+      p.error {
+        color: red;
+        font-weight: bold;
+      }
+      label.radio {
+        display: inline;
+      }
+      input:invalid {
+        color:red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="page-heading">
+      <img id="logo" src="resources/auza-logo.svg" alt="Auza">
+      <h1 id='page-title'>firmware</h1>
+    </div>
+
+    <div id="tabs">
+      <button class="tab-link" onclick="openTab(event, 1)" id="default-tab">How To Connect A Module</button>
+      <button class="tab-link" onclick="openTab(event, 2)">Firmware Tool</button>
+    </div>    
+
+    <div id="tab1-content">
+      <div id="select-product">
+        <div class="custom-select" style="width:200px;">
+          <select>
+            <option value="0">Select Module:</option>
+            <option value="1">Wave Packets</option>
+            <option value="2">Future Module</option>
+          </select>
+        </div>
+      </div>
+      <div id="wp-guide">  
+        <div id="step1">
+          <span style="font-size:20px;"> <b>Firmware Tool Requirements:</b></span>  
+          <br><br>
+          <ul>
+            <li>Chrome, Edge or Opera web browser. Other browsers are not compatible.</li>
+            <li>USB Micro B cable</li>
+            <li>macOS, or Windows 10 or later with this windows driver installed. Some Android phones may also work.</li>
+          </ul>  
+
+        </div>
+  
+        <div id="step2">
+          <span style="font-size:20px;"> <b>Connecting Wave Packets:</b></span>  
+          <br><br>
+          Before updating Wave Packets using the Firmware Tool, the module needs to boot in to firmware update mode. 
+          <br><br>
+          Follow these steps strictly in this order:
+          <br><br>
+          <ol>
+            <li>&nbsp Turn off your Eurorack power supply.</li>
+            <li>&nbsp Connect a USB cable between the port on the back of the module and your computer.
+            <li>&nbsp Hold the PCB button while turning your Eurorack power supply on. Release button once power is on.
+          </ol>  
+          <div id="connect-diagrams">
+            <img class="diagram" src="resources/attach_usb.svg" alt="Auza">
+            <img id= "diagram2" class="diagram" src="resources/button_to_press.svg" alt="Auza">
+          </div>
+          If the module's LEDs remain off once powered on, it's ready to be used with the Firmware Tool!
+          <br><br>
+        </div> 
+      </div>     
+    </div>
+
+    <div id="tab2-content">
+      <div id="update-interface">
+        <div id="status-area">
+          <b>Status:</b>
+          <br>
+          <span id="status">
+            Browser not connected to module
+          </span>
+        </div>
+        <div id ="connect-div">
+          <button id="connect" type = "button">CONNECT</button>
+          <span id="extra-connect-text">to STM32 BOOTLOADER</span>
+        </div>
+        <div id="interface-utility-area">
+          <fieldset id ="check-version-div">
+            <legend>Check Firmware Version</legend>
+            <button id="check" type = "button">Check Version</button>
+            <div id ="version-result-text">Wave Packets Firmware 1.0.3</div>
+          </fieldset>
+          <fieldset id ="update-div">
+            <legend>Update Firmware</legend>
+            <button id="update" type = "button">Update Firmware</button>
+            <div id="proginfo"></div>
+            <progress id="progbar" max="1000" value="0"></progress>
+          </fieldset>  
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
